@@ -28,11 +28,11 @@ const defaultContext: ContextFunction<[], any> = async () => ({});
 export function startServerAndCreateGoogleCloudFunctionsHandler(
   server: ApolloServer<BaseContext>,
   options: Options<BaseContext>,
-): void;
+): HttpFunction;
 export function startServerAndCreateGoogleCloudFunctionsHandler<Context extends BaseContext>(
   server: ApolloServer<Context>,
   options: WithRequired<Options<Context>, 'context'>,
-): void;
+): HttpFunction;
 export function startServerAndCreateGoogleCloudFunctionsHandler<Context extends BaseContext>(
   server: ApolloServer<Context>,
   options: Options<Context>,
@@ -76,5 +76,6 @@ export function startServerAndCreateGoogleCloudFunctionsHandler<Context extends 
     }
   };
 
-  return http(options.functionTarget, handler);
+  http(options.functionTarget, handler)
+  return handler;
 }
